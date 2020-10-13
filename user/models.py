@@ -3,33 +3,34 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class CustomUserManager(BaseUserManager):
 	
-	def create_user(self, email, business_name, password=None):
+	def create_user(self, email, password=None):
 
 		if not email:
 			raise ValueError("You must type in your email to sign up")
 
 		user = self.model(
-			email = self.normalize_email(email),
-			business_name = business_name,
-			)
+			email=self.normalize_email(email),
+			
+		)
 
 		user.set_password(password)
 		user.save(using=self._db)
 
 		return user
 
-	def create_superuser(self, email, business_name, password=None):
+	def create_superuser(self, email, password=None):
 
 		user = self.create_user(
 			email,
-			business_name = business_name,
-			password = password,
-			)
+			password=password,
+
+		)
 
 		user.is_admin = True
 		user.save(using=self._db)
 
 		return user
+
 
 # Create your models here.
 class CustomUser(AbstractBaseUser):
@@ -56,10 +57,10 @@ class CustomUser(AbstractBaseUser):
 	def has_perm(self, perm, obj=None):
 		return True
 
-	def has_module_perm(self, app_label):
+	def has_module_perms(self, app_label):
 		return True
 
 	@property
 	def is_staff(self):
-		return self._is_admin
+		return self.is_admin
 	
