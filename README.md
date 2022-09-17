@@ -24,4 +24,4 @@ on Twitter for me to explain it to you and probably help you implement your own
 in your projects.
 
 Twitter: www.twitter.com/RasheedStarlet
-WhatsApp: +233 267785579
+WhatsApp: +233 55 372 7115
